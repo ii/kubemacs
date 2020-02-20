@@ -18,6 +18,20 @@ spec:
       - name: tmate-master
         image: tmate/tmate-master:latest
         env:
+        # - name: INTERNAL_API_AUTH_TOKEN
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: misc
+        #       key: wsapi_key
+        - name: ERL_COOKIE
+          valueFrom:
+            secretKeyRef:
+              name: misc
+              key: erl_cookie
+        - name: ERL_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         - name: MASTER_BASE_URL
           valueFrom:
             configMapKeyRef:
